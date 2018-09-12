@@ -2,9 +2,13 @@ if !exists('g:test#javascript#jest#file_pattern')
   let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 endif
 
+if !exists('g:test#javascript#jest#package')
+  let g:test#javascript#jest#package = 'jest'
+endif
+
 function! test#javascript#jest#test_file(file) abort
   return a:file =~# g:test#javascript#jest#file_pattern
-    \ && test#javascript#has_package('jest')
+    \ && test#javascript#has_package(g:test#javascript#jest#package)
 endfunction
 
 function! test#javascript#jest#build_position(type, position) abort
